@@ -37,7 +37,8 @@ def get_pokemon_data(limit=1, save_json=False):
             all_divs = soup.find_all('div', attrs={'align': 'center'})
             center_panel_info = all_divs[3].findAll('td', {'class': 'fooinfo'})
         except Exception as e:
-            logger.error('There was an error trying to identify elements on the webpage.')
+            logger.error('There was an error trying to identify elements on the webpage. Error:', e)
+            raise
 
         pokemon = {}
         pokemon['name']           = center_panel_info[1].text
@@ -46,13 +47,13 @@ def get_pokemon_data(limit=1, save_json=False):
         pokemon['height']         = (center_panel_info[5].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
         pokemon['weight']         = (center_panel_info[6].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
         
-        # Get data from stats table
         logger.info('Extracting Pokémon statistics from dextable'.format(OUTPUT_FILE_NAME))
-        # all_tables = soup.find_all('table', attrs={'class': 'dextable'})
-        # base_stats_table = all_tables[7].findAll('td')
-
-        base_stats_table = soup.find('a', attrs={'name': 'stats'}).find_next('table')
-        base_stats_td = base_stats_table.findAll('td')
+        try:
+            base_stats_table = soup.find('a', attrs={'name': 'stats'}).find_next('table')
+            base_stats_td = base_stats_table.findAll('td')
+        except Exception as e:
+            logger.error('There was an error trying to identify elements on the webpage. Error:', e)
+            raise
 
         pokemon['hit_points'] = int(base_stats_td[8].text)
         pokemon['attack']     = int(base_stats_td[9].text)
