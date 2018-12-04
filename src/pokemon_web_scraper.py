@@ -23,7 +23,6 @@ def get_pokemon_data(min_number=1, max_number=1, save_json=False):
     :param max_number: The upper bound Pokémon number to retrieve.
     :param save_json: Save the information to a JSON file.
     """
-
     if save_json:
         all_pokemon = []
 
@@ -63,9 +62,7 @@ def get_pokemon_data(min_number=1, max_number=1, save_json=False):
         pokemon['speed']      = int(base_stats_td[12].text)
 
         # Print the data out nicely
-        print('=' * 30)
-        print_pokemon_data(pokemon)
-        print('=' * 30)
+        print_pokemon_data(pokemon, separators=False)
 
         if save_json:
             all_pokemon.append(pokemon)
@@ -77,11 +74,14 @@ def get_pokemon_data(min_number=1, max_number=1, save_json=False):
         output_file.close()
 
 
-def print_pokemon_data(pokemon):
+def print_pokemon_data(pokemon, separators=True):
     """
     Print formatted Pokémon data.
     :param pokemon: An object containing a Pokémon's statistics.
+    :param separators: Add line separators on either side of the Pokémon statistics.
     """
+    if separators:
+        print('-' * 30)
     print('Name\t\t', pokemon['name'])
     print('Number\t\t', pokemon['number'])
     print('Classification\t', pokemon['classification'])
@@ -92,6 +92,8 @@ def print_pokemon_data(pokemon):
     print('Defense\t\t', pokemon['defense'])
     print('Special\t\t', pokemon['special'])
     print('Speed\t\t', pokemon['speed'])
+    if separators:
+        print('-' * 30)
 
 
 if __name__ == '__main__':
