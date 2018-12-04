@@ -16,17 +16,18 @@ logger = logging.getLogger(__name__)
 OUTPUT_FILE_NAME = 'pokemon.json'
 
 
-def get_pokemon_data(limit=1, save_json=False):
+def get_pokemon_data(min_number=1, max_number=1, save_json=False):
     """
     Scrape Serebii.net for Pokémon data and output to console.
-    :param limit: The maximum number of Pokémon to retrieve information from.
+    :param min_number: The lower bound Pokémon number to retrieve.
+    :param max_number: The upper bound Pokémon number to retrieve.
     :param save_json: Save the information to a JSON file.
     """
 
     if save_json:
         all_pokemon = []
 
-    for i in range(1, (limit + 1)):
+    for i in range(min_number, (max_number + 1)):
         # Extract data from Serebii.net
         logger.info('Extracting data from Serebii.net')
         url = 'https://serebii.net/pokedex/{}.shtml'.format(str(i).zfill(3))
@@ -47,8 +48,8 @@ def get_pokemon_data(limit=1, save_json=False):
         pokemon['height']         = (center_panel_info[5].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
         pokemon['weight']         = (center_panel_info[6].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
         
-        logger.info('Extracting Pokémon statistics from dextable'.format(OUTPUT_FILE_NAME))
         try:
+            logger.info('Extracting Pokémon statistics from dextable'.format(OUTPUT_FILE_NAME))
             base_stats_table = soup.find('a', attrs={'name': 'stats'}).find_next('table')
             base_stats_td = base_stats_table.findAll('td')
         except Exception as e:
@@ -94,4 +95,4 @@ def print_pokemon_data(pokemon):
 
 
 if __name__ == '__main__':
-    get_pokemon_data(limit=11, save_json=True)
+    get_pokemon_data(min_number=10, max_number=20, save_json=False)
