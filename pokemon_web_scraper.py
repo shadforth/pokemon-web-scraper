@@ -7,37 +7,42 @@ import bs4
 
 from colorama import Fore, Back, Style
 
+NUMBER_LENGTH = 3
 
-def get_pokemon_data():
+def get_pokemon_data(limit=10):
     """
     Scrape Serebii.net for Pokémon data and output to console.
+    :param limit: The maximum pokemon number to retrieve information from.
     """
 
-    # Extract data from Serebii.net
-    data = requests.get('https://serebii.net/pokedex/001.shtml')
-    soup = bs4.BeautifulSoup(data.text, 'html.parser')
-    all_divs = soup.find_all('div', attrs={'align': 'center'})
-    center_panel_info = all_divs[3].findAll('td', {'class': 'fooinfo'})
+    for i in range(1, limit):
+        # Extract data from Serebii.net
+        url = 'https://serebii.net/pokedex/{}.shtml'.format(str(i).zfill(NUMBER_LENGTH))
+        data = requests.get(url)
+        soup = bs4.BeautifulSoup(data.text, 'html.parser')
+        all_divs = soup.find_all('div', attrs={'align': 'center'})
+        center_panel_info = all_divs[3].findAll('td', {'class': 'fooinfo'})
 
-    pokemon = {}
-    pokemon['name']           = center_panel_info[1].text
-    pokemon['number']         = center_panel_info[3].text
-    pokemon['classification'] = center_panel_info[4].text
-    pokemon['height']         = (center_panel_info[5].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
-    pokemon['weight']        = (center_panel_info[6].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
-    
-    # Get data from stats table
-    all_tables = soup.find_all('table', attrs={'class': 'dextable'})
-    base_stats_table = all_tables[7].findAll('td')
+        pokemon = {}
+        pokemon['name']           = center_panel_info[1].text
+        pokemon['number']         = center_panel_info[3].text
+        pokemon['classification'] = center_panel_info[4].text
+        pokemon['height']         = (center_panel_info[5].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
+        pokemon['weight']        = (center_panel_info[6].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
+        
+        # Get data from stats table
+        all_tables = soup.find_all('table', attrs={'class': 'dextable'})
+        base_stats_table = all_tables[7].findAll('td')
 
-    pokemon['hit_points'] = base_stats_table[8].text
-    pokemon['attack']     = base_stats_table[9].text
-    pokemon['defense']    = base_stats_table[10].text
-    pokemon['special']    = base_stats_table[11].text
-    pokemon['speed']      = base_stats_table[12].text
+        pokemon['hit_points'] = base_stats_table[8].text
+        pokemon['attack']     = base_stats_table[9].text
+        pokemon['defense']    = base_stats_table[10].text
+        pokemon['special']    = base_stats_table[11].text
+        pokemon['speed']      = base_stats_table[12].text
 
-    # Print the data out nicely
-    print_pokemon_data(pokemon)
+        # Print the data out nicely
+        print_pokemon_data(pokemon)
+        print('-' * 30)
 
 
 def print_pokemon_data(pokemon):
