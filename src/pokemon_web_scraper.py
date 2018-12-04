@@ -10,14 +10,16 @@ import bs4
 
 from colorama import Fore, Back, Style
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 OUTPUT_FILE_NAME = 'pokemon.json'
 
-def get_pokemon_data(limit=10, save_json=False):
+
+def get_pokemon_data(limit=1, save_json=False):
     """
     Scrape Serebii.net for Pokémon data and output to console.
-    :param limit: The maximum pokemon number to retrieve information from.
+    :param limit: The maximum number of Pokémon to retrieve information from.
     :param save_json: Save the information to a JSON file.
     """
 
@@ -26,15 +28,16 @@ def get_pokemon_data(limit=10, save_json=False):
 
     for i in range(1, (limit + 1)):
         # Extract data from Serebii.net
-        logging.debug('Extracting data from Serebii.net')
+        logger.info('Extracting data from Serebii.net')
         url = 'https://serebii.net/pokedex/{}.shtml'.format(str(i).zfill(3))
         data = requests.get(url)
         soup = bs4.BeautifulSoup(data.text, 'html.parser')
-        try: 
+        try:
+            logger.info('Extracting main Pokémon information')
             all_divs = soup.find_all('div', attrs={'align': 'center'})
             center_panel_info = all_divs[3].findAll('td', {'class': 'fooinfo'})
         except Exception as e:
-            logging.error('There was an error trying to identify elements on the webpage.')
+            logger.error('There was an error trying to identify elements on the webpage.')
 
         pokemon = {}
         pokemon['name']           = center_panel_info[1].text
@@ -44,14 +47,18 @@ def get_pokemon_data(limit=10, save_json=False):
         pokemon['weight']         = (center_panel_info[6].text).replace('\r', '').replace('\n', '').replace('\t\t\t', ',').split(',')
         
         # Get data from stats table
-        all_tables = soup.find_all('table', attrs={'class': 'dextable'})
-        base_stats_table = all_tables[7].findAll('td')
+        logger.info('Extracting Pokémon statistics from dextable'.format(OUTPUT_FILE_NAME))
+        # all_tables = soup.find_all('table', attrs={'class': 'dextable'})
+        # base_stats_table = all_tables[7].findAll('td')
 
-        pokemon['hit_points'] = int(base_stats_table[8].text)
-        pokemon['attack']     = int(base_stats_table[9].text)
-        pokemon['defense']    = int(base_stats_table[10].text)
-        pokemon['special']    = int(base_stats_table[11].text)
-        pokemon['speed']      = int(base_stats_table[12].text)
+        base_stats_table = soup.find('a', attrs={'name': 'stats'}).find_next('table')
+        base_stats_td = base_stats_table.findAll('td')
+
+        pokemon['hit_points'] = int(base_stats_td[8].text)
+        pokemon['attack']     = int(base_stats_td[9].text)
+        pokemon['defense']    = int(base_stats_td[10].text)
+        pokemon['special']    = int(base_stats_td[11].text)
+        pokemon['speed']      = int(base_stats_td[12].text)
 
         # Print the data out nicely
         print('=' * 30)
@@ -62,7 +69,7 @@ def get_pokemon_data(limit=10, save_json=False):
             all_pokemon.append(pokemon)
     
     if save_json:
-        logging.info('Writing to {}'.format(OUTPUT_FILE_NAME))
+        logger.info('Writing to {}'.format(OUTPUT_FILE_NAME))
         output_file = open(OUTPUT_FILE_NAME, 'w+')
         output_file.write(json.dumps(all_pokemon))
         output_file.close()
@@ -86,4 +93,4 @@ def print_pokemon_data(pokemon):
 
 
 if __name__ == '__main__':
-    get_pokemon_data(limit=3, save_json=True)
+    get_pokemon_data(limit=11, save_json=True)

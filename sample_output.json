@@ -1,1 +1,200 @@
-[{"name": "Bulbasaur", "number": "#001", "classification": "Seed Pok\u00e9mon", "height": ["2'04\"", "0.7m"], "weight": ["15.2lbs", "6.9kg"], "hit_points": 45, "attack": 49, "defense": 49, "special": 65, "speed": 45}, {"name": "Ivysaur", "number": "#002", "classification": "Seed Pok\u00e9mon", "height": ["3'03\"", "1m"], "weight": ["28.7lbs", "13kg"], "hit_points": 60, "attack": 62, "defense": 63, "special": 80, "speed": 60}, {"name": "Venusaur", "number": "#003", "classification": "Seed Pok\u00e9mon", "height": ["6'07\"", "2m"], "weight": ["220.5lbs", "100kg"], "hit_points": 80, "attack": 82, "defense": 83, "special": 100, "speed": 80}]
+[
+    {
+        "name": "Bulbasaur",
+        "number": "#001",
+        "classification": "Seed Pok\u00e9mon",
+        "height": [
+            "2'04\"",
+            "0.7m"
+        ],
+        "weight": [
+            "15.2lbs",
+            "6.9kg"
+        ],
+        "hit_points": 45,
+        "attack": 49,
+        "defense": 49,
+        "special": 65,
+        "speed": 45
+    },
+    {
+        "name": "Ivysaur",
+        "number": "#002",
+        "classification": "Seed Pok\u00e9mon",
+        "height": [
+            "3'03\"",
+            "1m"
+        ],
+        "weight": [
+            "28.7lbs",
+            "13kg"
+        ],
+        "hit_points": 60,
+        "attack": 62,
+        "defense": 63,
+        "special": 80,
+        "speed": 60
+    },
+    {
+        "name": "Venusaur",
+        "number": "#003",
+        "classification": "Seed Pok\u00e9mon",
+        "height": [
+            "6'07\"",
+            "2m"
+        ],
+        "weight": [
+            "220.5lbs",
+            "100kg"
+        ],
+        "hit_points": 80,
+        "attack": 82,
+        "defense": 83,
+        "special": 100,
+        "speed": 80
+    },
+    {
+        "name": "Charmander",
+        "number": "#004",
+        "classification": "Lizard Pok\u00e9mon",
+        "height": [
+            "2'00\"",
+            "0.6m"
+        ],
+        "weight": [
+            "18.7lbs",
+            "8.5kg"
+        ],
+        "hit_points": 39,
+        "attack": 52,
+        "defense": 43,
+        "special": 50,
+        "speed": 65
+    },
+    {
+        "name": "Charmeleon",
+        "number": "#005",
+        "classification": "Flame Pok\u00e9mon",
+        "height": [
+            "3'07\"",
+            "1.1m"
+        ],
+        "weight": [
+            "41.9lbs",
+            "19kg"
+        ],
+        "hit_points": 58,
+        "attack": 64,
+        "defense": 58,
+        "special": 65,
+        "speed": 80
+    },
+    {
+        "name": "Charizard",
+        "number": "#006",
+        "classification": "Flame Pok\u00e9mon",
+        "height": [
+            "5'07\"",
+            "1.7m"
+        ],
+        "weight": [
+            "199.5lbs",
+            "90.5kg"
+        ],
+        "hit_points": 78,
+        "attack": 84,
+        "defense": 78,
+        "special": 85,
+        "speed": 100
+    },
+    {
+        "name": "Squirtle",
+        "number": "#007",
+        "classification": "Tiny Turtle Pok\u00e9mon",
+        "height": [
+            "1'08\"",
+            "0.5m"
+        ],
+        "weight": [
+            "19.8lbs",
+            "9kg"
+        ],
+        "hit_points": 44,
+        "attack": 48,
+        "defense": 65,
+        "special": 50,
+        "speed": 43
+    },
+    {
+        "name": "Wartortle",
+        "number": "#008",
+        "classification": "Turtle Pok\u00e9mon",
+        "height": [
+            "3'03\"",
+            "1m"
+        ],
+        "weight": [
+            "49.6lbs",
+            "22.5kg"
+        ],
+        "hit_points": 59,
+        "attack": 63,
+        "defense": 80,
+        "special": 65,
+        "speed": 58
+    },
+    {
+        "name": "Blastoise",
+        "number": "#009",
+        "classification": "Shellfish Pok\u00e9mon",
+        "height": [
+            "5'03\"",
+            "1.6m"
+        ],
+        "weight": [
+            "188.5lbs",
+            "85.5kg"
+        ],
+        "hit_points": 79,
+        "attack": 83,
+        "defense": 100,
+        "special": 85,
+        "speed": 78
+    },
+    {
+        "name": "Caterpie",
+        "number": "#010",
+        "classification": "Worm Pok\u00e9mon",
+        "height": [
+            "1'00\"",
+            "0.3m"
+        ],
+        "weight": [
+            "6.4lbs",
+            "2.9kg"
+        ],
+        "hit_points": 45,
+        "attack": 30,
+        "defense": 35,
+        "special": 20,
+        "speed": 45
+    },
+    {
+        "name": "Metapod",
+        "number": "#011",
+        "classification": "Cocoon Pok\u00e9mon",
+        "height": [
+            "2'04\"",
+            "0.7m"
+        ],
+        "weight": [
+            "21.8lbs",
+            "9.9kg"
+        ],
+        "hit_points": 50,
+        "attack": 20,
+        "defense": 55,
+        "special": 25,
+        "speed": 30
+    }
+]
