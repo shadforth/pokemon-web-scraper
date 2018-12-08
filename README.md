@@ -6,13 +6,26 @@ A web scraper made with Python that scrapes Serebii.net. Mostly made for my [Vue
 
 ### Prerequisites
 
-To get started, make sure Python is installed on your machine.
+- Python
+- pip
+
+To get started, make sure Python is installed on your machine. Detailed instructions on how to install Python can be found at [Real Python](https://realpython.com/installing-python/). To check that Python is successfully installed, run the following command in terminal.
 
 ```bash
 $ python --version
 ```
 
-Detailed instructions on how to install Python can be found at [Real Python](https://realpython.com/installing-python/).
+Next, install Python's package manager, pip. Instructions on how to install pip can be found at [PyPA]. Check that pip was successfully installed by running the following command.
+
+```bash
+$ pip --version
+```
+
+Finally, install the required Python packages by navigating to the project directory and running the following command.
+
+```bash
+$ pip install -r requirements.txt
+```
 
 ### Usage
 

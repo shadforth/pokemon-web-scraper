@@ -1,12 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """
 This module scrapes Serebii.net for Pokémon statistics.
 """
 import argparse
-import bs4
 import json
 import logging
 import os
+import bs4
 import requests
 
 logging.basicConfig(level=logging.INFO)
