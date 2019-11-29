@@ -39,7 +39,7 @@ def get_pokemon_data(urls):
         soup = bs4.BeautifulSoup(data.text, 'html.parser')
         try:
             all_divs = soup.find_all('div', attrs={'align': 'center'})
-            center_panel_info = all_divs[3].findAll('td', {'class': 'fooinfo'})
+            center_panel_info = all_divs[1].findAll('td', {'class': 'fooinfo'})
         except Exception:
             LOGGER.error('There was an error trying to identify HTML elements on the webpage.')
             raise
