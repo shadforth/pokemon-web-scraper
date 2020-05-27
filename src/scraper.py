@@ -41,7 +41,8 @@ def get_pokemon_data(urls):
             all_divs = soup.find_all('div', attrs={'align': 'center'})
             center_panel_info = all_divs[1].findAll('td', {'class': 'fooinfo'})
         except Exception:
-            LOGGER.error('There was an error trying to identify HTML elements on the webpage.')
+            LOGGER.error(
+                'There was an error trying to identify HTML elements on the webpage.')
             raise
 
         pokemon = dict()
@@ -52,10 +53,12 @@ def get_pokemon_data(urls):
         pokemon['weight'] = (center_panel_info[6].text).split('\r\n\t\t\t')
 
         try:
-            base_stats_table = soup.find('a', attrs={'name': 'stats'}).find_next('table')
+            base_stats_table = soup.find(
+                'a', attrs={'name': 'stats'}).find_next('table')
             base_stats_td = base_stats_table.findAll('td')
         except Exception:
-            LOGGER.error('There was an error trying to identify HTML elements on the webpage.')
+            LOGGER.error(
+                'There was an error trying to identify HTML elements on the webpage.')
             raise
 
         pokemon['hit_points'] = int(base_stats_td[8].text)
@@ -66,14 +69,16 @@ def get_pokemon_data(urls):
 
         if not ARGS.save or ARGS.verbose:
             print_pokemon_data(pokemon)
-        LOGGER.info('Appending %s %s to Pokémon array', pokemon['number'], pokemon['name'])
+        LOGGER.info('Appending %s %s to Pokémon array',
+                    pokemon['number'], pokemon['name'])
         pokemon_list.append(pokemon)
 
     if ARGS.save:
         LOGGER.info('Saving to %s', OUTPUT_FILE)
         save_to_json(pokemon_list)
     else:
-        LOGGER.info('All Pokémon retrieved! To save to JSON, use the --save flag')
+        LOGGER.info(
+            'All Pokémon retrieved! To save to JSON, use the --save flag')
 
 
 def save_to_json(pokemon_list):

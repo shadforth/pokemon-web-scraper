@@ -1,60 +1,68 @@
 # Pokémon Web Scraper
 
-A web scraper made with Python that scrapes Serebii.net. Mostly made for my [Vue Pokédex](https://github.com/shadforth/vue-pokedex) project.
+A little Python CLI application that scrapes Serebii.net. Mostly made for my [Vue Pokédex](https://github.com/shadforth/vue-pokedex) project.
 
-## Getting Started
+![](./assets/pokemon-web-scraper-screenshot.png)
+
+## Getting started
 
 ### Prerequisites
 
 - Python
 - pip
 
-To get started, make sure Python 3 is installed on your machine. Detailed instructions on how to install Python can be found at [Real Python](https://realpython.com/installing-python). To check that Python is successfully installed, run the following command in terminal.
+### Installation
+
+Install the required Python packages by navigating to the project's root directory and running the following command.
 
 ```bash
-python --version
-```
-
-Next, install Python's package manager, pip. Instructions on how to install pip can be found at [PyPA]. Check that pip was successfully installed by running the following command.
-
-```bash
-pip --version
-```
-
-Finally, install the required Python packages by navigating to the project directory and running the following command.
-
-```bash
+# Install requirements
 pip install -r requirements.txt
 ```
 
 ### Usage
 
-In terminal, navigate to the project's `src` folder. Run the following command. By default, this will only retrieve Bulbasaur.
+In terminal, run the following command. By default, this will only retrieve Bulbasaur.
 
 ```bash
-python scraper.py
+# Run the Serebii.net scraper
+python src/scraper.py
 ```
 
-To specify which Pokémon to retrieve, use the `--first` and `--last` flags.
+Some useful commands are listed below.
 
 ```bash
-python scraper.py --first 1 --last 10
+# Help on running the script
+python src/scraper.py --help
+
+# Specify which Pokémon to retrieve (1-10)
+python src/scraper.py --first 1 --last 10
+
+
+# Save output to a JSON file with the `--save` flag
+python src/scraper.py --first 1 --last 10 --save
+
+# View the retrieved web output in console
+python src/scraper.py --verbose
 ```
 
-To save the output to a JSON file, use the `--save` flag.
+## Sample JSON output
 
-```bash
-python scraper.py --first 1 --last 10 --save
-```
+Output JSON file when using the `--save` flag.
 
-To view the retrieved web output in console, use the `--verbose` flag.
-
-```bash
-python scraper.py --verbose
-```
-
-For help on running the script, use the `--help` flag.
-
-```bash
-python scraper.py --help
+```json
+[
+  {
+    "name": "Bulbasaur",
+    "number": "#001",
+    "classification": "Seed Pok\u00e9mon",
+    "height": ["2'04\"", "0.7m"],
+    "weight": ["15.2lbs", "6.9kg"],
+    "hit_points": 45,
+    "attack": 49,
+    "defense": 49,
+    "special": 65,
+    "speed": 45
+  }
+]
 ```
