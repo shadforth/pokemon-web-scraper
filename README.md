@@ -26,24 +26,23 @@ In terminal, run the following command. By default, this will only retrieve Bulb
 
 ```bash
 # Run the Serebii.net scraper
-python src/scraper.py
+python scraper.py
 ```
 
 Some useful commands are listed below.
 
 ```bash
 # Help on running the script
-python src/scraper.py --help
+python scraper.py --help
 
 # Specify which Pokémon to retrieve (1-10)
-python src/scraper.py --first 1 --last 10
-
+python scraper.py --first 1 --last 10
 
 # Save output to a JSON file with the `--save` flag
-python src/scraper.py --first 1 --last 10 --save
+python scraper.py --first 1 --last 10 --save
 
 # View the retrieved web output in console
-python src/scraper.py --verbose
+python scraper.py --verbose
 ```
 
 ## Sample JSON output

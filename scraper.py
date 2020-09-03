@@ -69,7 +69,7 @@ def get_pokemon_data(urls):
 
         if not ARGS.save or ARGS.verbose:
             print_pokemon_data(pokemon)
-        LOGGER.info('Appending %s %s to Pokémon array',
+        LOGGER.info('Adding %s %s to dataset',
                     pokemon['number'], pokemon['name'])
         pokemon_list.append(pokemon)
 
