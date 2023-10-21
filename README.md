@@ -2,6 +2,8 @@
 
 A little Python CLI application that scrapes Serebii.net. Mostly made for my [Vue Pokédex](https://github.com/shadforth/vue-pokedex) project.
 
+Gotta scrape 'em all!
+
 ![](./assets/pokemon-web-scraper-screenshot.png)
 
 ## Getting started
@@ -11,21 +13,15 @@ A little Python CLI application that scrapes Serebii.net. Mostly made for my [Vu
 - Python
 - pip
 
-### Installation
+### Install and usage
 
 Install the required Python packages by navigating to the project's root directory and running the following command.
 
+By default, `python scraper.py` will only retrieve Bulbasaur.
+
 ```bash
-# Install requirements
+cd src
 pip install -r requirements.txt
-```
-
-### Usage
-
-In terminal, run the following command. By default, this will only retrieve Bulbasaur.
-
-```bash
-# Run the Serebii.net scraper
 python scraper.py
 ```
 
