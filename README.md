@@ -13,7 +13,7 @@ Gotta scrape 'em all!
 - Python
 - pip
 
-## Installation
+### Installation
 
 Navigate to the project's root directory and run the following commands. By default, `python scraper.py` will only retrieve Bulbasaur.
 
@@ -22,7 +22,7 @@ pip install -r requirements.txt
 python scraper.py
 ```
 
-## Usage
+### Usage
 Some useful commands are listed below.
 
 ```bash
