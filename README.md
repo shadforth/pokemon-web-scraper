@@ -13,18 +13,16 @@ Gotta scrape 'em all!
 - Python
 - pip
 
-### Install and usage
+## Installation
 
-Install the required Python packages by navigating to the project's root directory and running the following command.
-
-By default, `python scraper.py` will only retrieve Bulbasaur.
+Navigate to the project's root directory and run the following commands. By default, `python scraper.py` will only retrieve Bulbasaur.
 
 ```bash
-cd src
 pip install -r requirements.txt
 python scraper.py
 ```
 
+## Usage
 Some useful commands are listed below.
 
 ```bash
