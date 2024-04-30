@@ -23,6 +23,7 @@ def setup_arg_parser():
     arg_parser = argparse.ArgumentParser(description='A Pokémon web scraper')
     arg_parser.add_argument('-s', '--save', action='store_true', help='save the output to JSON')
     arg_parser.add_argument('-f', '--first', default=1, type=int, help='the ID of the first Pokémon to retrieve')
+    arg_parser.add_argument('-n', '--name', default='charmander', type=str, help='name of the first Pokémon to retrieve')
     arg_parser.add_argument('-l', '--last', default=1, type=int, help='the ID of the last Pokémon to retrieve')
     arg_parser.add_argument('-v', '--verbose', action='store_true', help='print the Pokémon\'s statistics to console')
     return arg_parser.parse_args()
@@ -54,7 +55,13 @@ def extract_statistics(poke_id: int) -> object:
     """
     Scrapes the Serebii.net with a given Pokémon ID.
     """
-    url = 'https://serebii.net/pokedex-swsh/{}.shtml'.format(str(poke_id).zfill(3))
+
+    if args.name:
+        url = 'https://serebii.net/pokedex-sv/{}'.format(args.name.lower())
+        print(url)
+    else:
+        url = 'https://serebii.net/pokedex-sv/{}.shtml'.format(str(poke_id).zfill(3))
+
     data = requests.get(url)
     soup = bs4.BeautifulSoup(data.text, 'html.parser')
 
@@ -70,6 +77,19 @@ def extract_statistics(poke_id: int) -> object:
             weight = center_panel_info[7].find('td', string='Standard').findNext('td').text.replace('lbs', 'lbs ').split(" ")
 
         base_stats_td = all_divs[1].find('td', string=re.compile("Base Stats - Total.*")).find_next_siblings('td')
+        # Find the 'Effort Values Earned' data
+        effort_values = None
+        rows = soup.find_all('tr')
+        for row in rows:
+            cells = row.find_all('td')
+            for i, cell in enumerate(cells):
+                if cell.get_text(strip=True).lower() == 'effort values earned':
+                    # The effort values are in the next row, same column
+                    effort_values_row = rows[rows.index(row) + 1]
+                    effort_values = effort_values_row.find_all('td')[i].get_text(strip=True)
+                    break
+            if effort_values:
+                break
     except Exception:
         logging.error('There was an error trying to identify HTML elements on the webpage. URL: %s', url)
         raise
@@ -83,8 +103,10 @@ def extract_statistics(poke_id: int) -> object:
         "hit_points": int(base_stats_td[0].text),
         "attack": int(base_stats_td[1].text),
         "defense": int(base_stats_td[2].text),
-        "special": int(base_stats_td[3].text),
-        "speed": int(base_stats_td[4].text)
+        "sp_att": int(base_stats_td[3].text),
+        "sp_def": int(base_stats_td[4].text),
+        "speed": int(base_stats_td[5].text),
+        "effort_values": effort_values
     }
 
     return extracted_pokemon
@@ -102,8 +124,10 @@ def display_formatted(poke_object):
     print('HP\t\t', poke_object['hit_points'])
     print('Attack\t\t', poke_object['attack'])
     print('Defense\t\t', poke_object['defense'])
-    print('Special\t\t', poke_object['special'])
+    print('Sp.Att\t\t', poke_object['sp_att'])
+    print('Sp.Def\t\t', poke_object['sp_def'])
     print('Speed\t\t', poke_object['speed'])
+    print('Effort Values\t', poke_object['effort_values'])
     print('-' * 20)
 
 
